@@ -17,25 +17,25 @@ function playRound(playerSelection, computerSelection) {
 
     if (player === "rock") {
         if (comp === "paper") {
-            return "You Lose! Paper beats Rock";
+            return "computer";
         }else if (comp === "scissor") {
-            return "You Win! Rock beats Scissor";
+            return "player";
         }else {
             return "It's a tie!";
         }
     }else if (player === "paper") {
         if (comp === "rock") {
-            return "You Win! Paper beats Rock";
+            return "player";
         }else if (comp === "scissor") {
-            return "You Lose! Scissor beats Paper";
+            return "computer";
         }else {
             return "It's a tie!";
         }
-    }else if (player === "Scissor") {
+    }else if (player === "scissor") {
         if (comp === "rock") {
-            return "You Lose! Rock beats Scissor";
+            return "computer";
         }else if (comp === "paper") {
-            return "You Win! Scissor beats Paper";
+            return "player";
         }else {
             return "It's a tie!";
         }
@@ -45,6 +45,43 @@ function playRound(playerSelection, computerSelection) {
 
 }
    
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+
+
+function game() {
+    const computerSelection = getComputerChoice();
+    let playerSelection;
+    let playerScore = 0;
+    let computerScore = 0;
+    let whoWinTheGame;
+        // First to win 5
+        while (playerScore < 5 && computerScore < 5) {
+        // 5 rounds only
+        //for (let i = 1; i<=5; i++) {
+            playerSelection = prompt("Choose your Hero!");
+            
+            whoWinTheGame = playRound(playerSelection, computerSelection);
+            if (playerSelection.toLowerCase() === "rock" || playerSelection.toLowerCase() === "paper" || playerSelection.toLowerCase() === "scissor") {
+                if (whoWinTheGame === "player") {
+                    playerScore++;
+                }else if (whoWinTheGame === "computer") {
+                    computerScore++;
+                }else {
+                    
+                }
+            }else {
+                return "Please enter valid input!"
+            }
+            
+        
+        //}
+        }
+    if (playerScore > computerScore) {
+        return "Player score: " + playerScore + ", Comp Score: " + computerScore + "\nCongratulations! You won!"
+    }else if (playerScore < computerScore){
+        return "Player score: " + playerScore + ", Comp Score: " + computerScore + "\nBetter Luck next time!"
+    }else {
+        return "Player score: " + playerScore + ", Comp Score: " + computerScore + "\nIt's a tie! Want a rematch?"
+    }
+}
+
+console.log(game())

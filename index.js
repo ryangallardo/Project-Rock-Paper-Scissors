@@ -52,6 +52,7 @@ function game() {
     let playerSelection;
     let playerScore = 0;
     let computerScore = 0;
+    let tie = 0;
     let whoWinTheGame;
         // First to win 5
         while (playerScore < 5 && computerScore < 5) {
@@ -66,7 +67,7 @@ function game() {
                 }else if (whoWinTheGame === "computer") {
                     computerScore++;
                 }else {
-                    
+                    tie++;
                 }
             }else {
                 return "Please enter valid input!"
@@ -76,12 +77,16 @@ function game() {
         //}
         }
     if (playerScore > computerScore) {
-        return "Player score: " + playerScore + ", Comp Score: " + computerScore + "\nCongratulations! You won!"
+        return "Player score: " + playerScore + ", Comp Score: " + computerScore
+         + ", Tie Rounds? " + tie + "\nCongratulations! You won!"
     }else if (playerScore < computerScore){
-        return "Player score: " + playerScore + ", Comp Score: " + computerScore + "\nBetter Luck next time!"
+        return "Player score: " + playerScore + ", Comp Score: " + computerScore
+         + ", Tie Rounds? " + tie + "\nBetter Luck next time!"
     }else {
-        return "Player score: " + playerScore + ", Comp Score: " + computerScore + "\nIt's a tie! Want a rematch?"
+        return "Player score: " + playerScore + ", Comp Score: " + computerScore
+         + ", Tie Rounds? " + tie + "\nIt's a tie! Want a rematch?"
     }
 }
 
 console.log(game())
+//console.log(getComputerChoice());

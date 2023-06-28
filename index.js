@@ -1,12 +1,9 @@
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3) + 1
     switch(randomNumber) {
-        case 1: return "Rock"
-        break;
-        case 2: return "Paper"
-        break;
-        case 3: return "Scissor"
-        break;
+        case 1: return "Rock";
+        case 2: return "Paper";
+        case 3: return "Scissor";
     }
 }
 
@@ -46,47 +43,63 @@ function playRound(playerSelection, computerSelection) {
 }
    
 
+let playerScore = 0;
+let computerScore = 0;
+let tie = 0;
 
-function game() {
+function game(e) {
     const computerSelection = getComputerChoice();
     let playerSelection;
-    let playerScore = 0;
-    let computerScore = 0;
-    let tie = 0;
     let whoWinTheGame;
         // First to win 5
-        while (playerScore < 5 && computerScore < 5) {
+        //while (playerScore < 5 && computerScore < 5) {
         // 5 rounds only
         //for (let i = 1; i<=5; i++) {
-            playerSelection = prompt("Choose your Hero!");
+            //playerSelection = prompt("Choose your Hero!");
             
+            playerSelection = e.srcElement.innerText.toLowerCase();
+
             whoWinTheGame = playRound(playerSelection, computerSelection);
             if (playerSelection.toLowerCase() === "rock" || playerSelection.toLowerCase() === "paper" || playerSelection.toLowerCase() === "scissor") {
                 if (whoWinTheGame === "player") {
                     playerScore++;
+                    playercounter.textContent = playerScore;
                 }else if (whoWinTheGame === "computer") {
                     computerScore++;
+                    compcounter.textContent = computerScore;
                 }else {
                     tie++;
+                    console.log("Tie: " + tie);
                 }
             }else {
-                return "Please enter valid input!"
+                alert("Please enter valid input!");
             }
             
         
         //}
+        //}
+    if (playerScore == 5 || computerScore == 5) {
+        if (playerScore > computerScore) {
+            result.textContent = "\nCongratulations! You won!"
+        }else if (playerScore < computerScore){
+            result.textContent = "You lose..." + "\nBetter Luck next time!"
+        }else {
+            result.textContent = "\nIt's a tie! Want a rematch?"
         }
-    if (playerScore > computerScore) {
-        return "Player score: " + playerScore + ", Comp Score: " + computerScore
-         + ", Tie Rounds? " + tie + "\nCongratulations! You won!"
-    }else if (playerScore < computerScore){
-        return "Player score: " + playerScore + ", Comp Score: " + computerScore
-         + ", Tie Rounds? " + tie + "\nBetter Luck next time!"
-    }else {
-        return "Player score: " + playerScore + ", Comp Score: " + computerScore
-         + ", Tie Rounds? " + tie + "\nIt's a tie! Want a rematch?"
     }
 }
 
-console.log(game())
+function sample(e){
+    console.log(e.srcElement.innerText.toLowerCase());
+}
+
+//console.log(game())
+const result = document.getElementById('results');
+const playercounter = document.querySelector('.playerscore');
+const compcounter = document.querySelector('.compscore');
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach(button => button.addEventListener('click', game))
+
 //console.log(getComputerChoice());
